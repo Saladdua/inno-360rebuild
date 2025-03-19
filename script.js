@@ -60,6 +60,27 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let formData = new FormData(this);
+
+    fetch("login.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert(data.message);
+            window.location.href = "dashboard.php"; // Redirect on success
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error("Lỗi:", error));
+});
+
 // Get elements
 const loginBtn = document.querySelector(".login");
 const modal = document.getElementById("loginModal");
