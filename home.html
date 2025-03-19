@@ -6,88 +6,11 @@
     <title>360HOME - Nền tảng kết nối nội thất</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: #fff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .nav-links {
-            list-style: none;
-            display: flex;
-        }
-        .nav-links li {
-            margin: 0 15px;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-        }
-        .nav-buttons button {
-            background: #008CBA;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-        .hero {
-            text-align: center;
-            padding: 50px;
-            background: url('background.jpg') center/cover;
-            color: white;
-        }
-        .projects {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 40px 20px;
-        }
-        .project {
-            background: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .design-btn {
-            background: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let index = 0;
-            const slides = document.querySelectorAll(".project");
-            function showSlide(n) {
-                slides.forEach((slide, i) => {
-                    slide.style.display = i === n ? "block" : "none";
-                });
-            }
-            setInterval(() => {
-                index = (index + 1) % slides.length;
-                showSlide(index);
-            }, 3000);
-            showSlide(index);
-        });
-    </script>
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo"> <img src="logo.png" alt="360HOME Logo"> </div>
+            <div class="logo"> <img src="/image/logo.png" alt="360HOME Logo"> </div>
             <ul class="nav-links">
                 <li><a href="#">LÝ DO LỰA CHỌN 360HOME</a></li>
                 <li><a href="#">XU HƯỚNG THIẾT KẾ NỘI THẤT</a></li>
@@ -110,27 +33,57 @@
     </section>
 
     <section class="projects">
-        <div class="project-slider">
-            <div class="project">
-                <img src="lumi-hanoi.jpg" alt="Lumi Hanoi">
-                <h3>LUMI HANOI</h3>
-                <button class="design-btn">NHẬN THIẾT KẾ</button>
+        <div class="slider-container">
+            <button class="prev">‹</button>
+            <div class="project-slider">
+                <div class="project">
+                    <img src="/image/lumi-hanoi.jpg" alt="Lumi Hanoi">
+                    <h3>LUMI HANOI</h3>
+                    <button class="design-btn">NHẬN THIẾT KẾ</button>
+                </div>
+                <div class="project">
+                    <img src="/image/diamond-crown.jpg" alt="Diamond Crown Hải Phòng">
+                    <h3>DIAMOND CROWN HẢI PHÒNG - DOJILAND</h3>
+                    <button class="design-btn">NHẬN THIẾT KẾ</button>
+                </div>
+                <div class="project">
+                    <img src="/image/heritage-westlake.jpg" alt="Heritage West Lake">
+                    <h3>HERITAGE WEST LAKE</h3>
+                    <button class="design-btn">NHẬN THIẾT KẾ</button>
+                </div>
             </div>
-            <div class="project">
-                <img src="diamond-crown.jpg" alt="Diamond Crown Hải Phòng">
-                <h3>DIAMOND CROWN HẢI PHÒNG - DOJILAND</h3>
-                <button class="design-btn">NHẬN THIẾT KẾ</button>
-            </div>
-            <div class="project">
-                <img src="heritage-westlake.jpg" alt="Heritage West Lake">
-                <h3>HERITAGE WEST LAKE</h3>
-                <button class="design-btn">NHẬN THIẾT KẾ</button>
-            </div>
-        </div>
+            <button class="next">›</button>
+        </div>        
     </section>
 
     <footer>
         <p>&copy; 2025 360HOME. All rights reserved.</p>
     </footer>
+
+    <!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>360HOME</h2>
+        <p>Đăng nhập vào tài khoản của bạn</p>
+        <form id="loginForm">
+            <label for="username">Tài khoản hoặc E-mail *</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Mật khẩu *</label>
+            <input type="password" id="password" name="password" required>
+            
+            <div class="remember">
+                <input type="checkbox" id="remember">
+                <label for="remember">Ghi nhớ tài khoản</label>
+            </div>
+
+            <button type="submit" class="login-btn">ĐĂNG NHẬP</button>
+        </form>
+        
+        <button class="google-login">Đăng nhập bằng tài khoản Google</button>
+        <p>Chưa có tài khoản? <a href="#">Đăng ký.</a></p>
+    </div>
+</div>
 </body>
 </html>
