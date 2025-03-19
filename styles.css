@@ -56,8 +56,8 @@ nav {
 }
 .slider-container {
     position: relative;
-    width: 900px; /* Fixed width */
-    height: 400px; /* Fixed height */
+    width: 900px;
+    height: 400px;
     margin: auto;
     overflow: hidden;
     display: flex;
@@ -67,13 +67,11 @@ nav {
 
 .project-slider {
     display: flex;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out; /* Enables smooth sliding */
 }
 
 .project {
-    flex: 0 0 100%; /* Each slide takes full container */
+    flex: 0 0 100%;
     text-align: center;
     background-color: white;
     padding: 10px;
@@ -83,9 +81,10 @@ nav {
 .project img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Crops image while maintaining aspect ratio */
+    object-fit: cover;
     border-radius: 8px;
 }
+
 
 button.prev, button.next {
     position: absolute;
