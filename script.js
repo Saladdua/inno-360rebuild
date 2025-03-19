@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         images[0].classList.add("active");
 
-        setInterval(showNextImage, 2000);
+        setInterval(showNextImage, 3000);
     });
 
     // Carousel navigation
