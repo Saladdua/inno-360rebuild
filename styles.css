@@ -41,7 +41,6 @@ nav {
 
 /* Hero Section */
 .hero {
-    background: url('hero-bg.jpg') center/cover no-repeat;
     color: rgb(0, 0, 0);
     padding: 80px 20px;
 }
@@ -49,73 +48,143 @@ nav {
     font-size: 32px;
 }
 
-/* Projects Section */
-@keyframes scrollSlider {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
-.slider-container {
+/* Project Section */
+.projects {
+    text-align: center;
+    padding: 40px 0;
     position: relative;
-    width: 900px; /* Fixed width */
-    height: 400px; /* Fixed height */
-    margin: auto;
     overflow: hidden;
+}
+
+/* Carousel Container */
+.carousel-container {
+    width: 100%;
+    overflow: hidden; /* Prevent extra images from showing */
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
-.project-slider {
+/* Carousel */
+.carousel {
     display: flex;
-    width: 100%;
-    max-width: 1200px; 
-    height: 100%;
-    margin: 0 auto;
-    overflow: hidden;
+    width: max-content; /* Ensure it fits all projects */
     transition: transform 0.5s ease-in-out;
 }
 
+/* Individual Project */
 .project {
-    margin: 0 auto;
-    flex: 0 0 100%; /* Each slide takes full container */
+    width: 280px;
+    background: white;
+    padding: 10px;
+    border-radius: 0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    background-color: white;
-    padding: 5px;
-    border-radius: 8px;
-    box-sizing: border-box;
+    margin: 0 10px;
+    position: relative;
 }
 
-.project img {
+/* Project Logo */
+.project-logo {
+    width: 60px;
+    margin: 10px auto;
+}
+
+/* Image Slider */
+.project-slider {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-slider img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Crops image while maintaining aspect ratio */
-    border-radius: 8px;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s linear;
 }
 
-button.prev, button.next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+.project-slider img.active {
+    opacity: 1;
+}
+
+/* project image */
+.project-image {
+    width: 100%; /* Make image take full width */
+    height: 180px; /* Set a fixed height */
+    object-fit: cover; /* Ensures it fills the container without distortion */
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+
+/* Dots for Images */
+.dots {
+    margin: 10px 0;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
+    background-color: #ccc;
+    display: inline-block;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #4CAF50;
+}
+
+/* Button */
+.design-btn {
+    background-color: #84c441;
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
-    font-size: 20px;
-    width: 40px;
-    height: 40px;
+    width: 80%;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.design-btn:hover {
+    background-color: #5f8f32;
+}
+
+/* Navigation Buttons */
+.prev-btn,
+.next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-button.prev { left: 5px; }
-button.next { right: 5px; }
-
-button.prev:hover, button.next:hover {
-    background: rgba(0, 0, 0, 0.8);
+.prev-btn {
+    left: -20px;
 }
+
+.next-btn {
+    right: -20px;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+    background-color: #ddd;
+}
+
+/* End of Project Section */
 
 
 /* End of slider */

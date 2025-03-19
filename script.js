@@ -2,56 +2,62 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentIndex = 0;
     const projects = document.querySelectorAll(".project");
     const totalProjects = projects.length;
-    document.addEventListener("DOMContentLoaded", () => {
-        const slider = document.querySelector(".project-slider");
-        const slides = document.querySelectorAll(".project");
-        let index = 0;
-        const totalSlides = slides.length;
-    
-        // Set the width of the slider dynamically
-        slider.style.width = `${totalSlides * 100}%`;
-    
-        // Set each slide's width to be equal to the container
-        slides.forEach(slide => {
-            slide.style.width = `${100 / totalSlides}%`;
-        });
-    
-        document.querySelector(".next").addEventListener("click", () => {
-            if (index < totalSlides - 1) {
-                index++;
-            } else {
-                index = 0;
-            }
-            updateSlider();
-        });
-    
-        document.querySelector(".prev").addEventListener("click", () => {
-            if (index > 0) {
-                index--;
-            } else {
-                index = totalSlides - 1;
-            }
-            updateSlider();
-        });
-    
-        function updateSlider() {
-            slider.style.transform = `translateX(-${index * (100 / totalSlides)}%)`;
-        }
-    });    
-     
-    function showNextProject() {
-        projects[currentIndex].style.display = "none";
-        currentIndex = (currentIndex + 1) % totalProjects;
-        projects[currentIndex].style.display = "block";
-    }
+    const sliders = document.querySelectorAll(".project-slider");
 
-    // Hide all projects except the first one
-    projects.forEach((project, index) => {
-        if (index !== 0) project.style.display = "none";
+    sliders.forEach(slider => {
+        let images = slider.querySelectorAll("img");
+        let dotsContainer = slider.parentElement.querySelector(".dots");
+        let index = 0;
+
+        // Create dots dynamically
+        images.forEach((_, i) => {
+            let dot = document.createElement("div");
+            dot.classList.add("dot");
+            if (i === 0) dot.classList.add("active");
+            dot.addEventListener("click", () => {
+                images[index].classList.remove("active");
+                dotsContainer.children[index].classList.remove("active");
+                index = i;
+                images[index].classList.add("active");
+                dotsContainer.children[index].classList.add("active");
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        function showNextImage() {
+            images[index].classList.remove("active");
+            dotsContainer.children[index].classList.remove("active");
+            index = (index + 1) % images.length;
+            images[index].classList.add("active");
+            dotsContainer.children[index].classList.add("active");
+        }
+
+        images[0].classList.add("active");
+
+        setInterval(showNextImage, 2000);
     });
 
-    // Auto slide every 3 seconds
-    setInterval(showNextProject, 3000);
+    // Carousel navigation
+    const carousel = document.querySelector(".carousel");
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+
+    let scrollAmount = 0;
+    const scrollStep = 300;
+
+    prevBtn.addEventListener("click", () => {
+        scrollAmount -= scrollStep;
+        if (scrollAmount < 0) scrollAmount = 0;
+        carousel.style.transform = `translateX(-${scrollAmount}px)`;
+    });
+
+    nextBtn.addEventListener("click", () => {
+        scrollAmount += scrollStep;
+        if (scrollAmount > carousel.scrollWidth - carousel.clientWidth) {
+            scrollAmount = carousel.scrollWidth - carousel.clientWidth;
+        }
+        carousel.style.transform = `translateX(-${scrollAmount}px)`;
+    });
 });
 
 // Get elements
