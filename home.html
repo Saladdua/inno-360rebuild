@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360HOME - Nền tảng kết nối nội thất</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+        .nav-links li {
+            margin: 0 15px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+        }
+        .nav-buttons button {
+            background: #008CBA;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px;
+            background: url('background.jpg') center/cover;
+            color: white;
+        }
+        .projects {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 20px;
+        }
+        .project {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .design-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let index = 0;
+            const slides = document.querySelectorAll(".project");
+            function showSlide(n) {
+                slides.forEach((slide, i) => {
+                    slide.style.display = i === n ? "block" : "none";
+                });
+            }
+            setInterval(() => {
+                index = (index + 1) % slides.length;
+                showSlide(index);
+            }, 3000);
+            showSlide(index);
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"> <img src="logo.png" alt="360HOME Logo"> </div>
+            <ul class="nav-links">
+                <li><a href="#">LÝ DO LỰA CHỌN 360HOME</a></li>
+                <li><a href="#">XU HƯỚNG THIẾT KẾ NỘI THẤT</a></li>
+                <li><a href="#">DỰ ÁN</a></li>
+                <li><a href="#">TIN TỨC</a></li>
+                <li><a href="#">DÀNH CHO KTS</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="contact">LIÊN HỆ TƯ VẤN</button>
+                <button class="login">ĐĂNG NHẬP</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>360HOME – Nền tảng kết nối hoàn thiện nội thất toàn diện</h1>
+            <p>Giải pháp hoàn hảo, tối ưu chi phí cho ngôi nhà của bạn!</p>
+        </div>
+    </section>
+
+    <section class="projects">
+        <div class="project-slider">
+            <div class="project">
+                <img src="lumi-hanoi.jpg" alt="Lumi Hanoi">
+                <h3>LUMI HANOI</h3>
+                <button class="design-btn">NHẬN THIẾT KẾ</button>
+            </div>
+            <div class="project">
+                <img src="diamond-crown.jpg" alt="Diamond Crown Hải Phòng">
+                <h3>DIAMOND CROWN HẢI PHÒNG - DOJILAND</h3>
+                <button class="design-btn">NHẬN THIẾT KẾ</button>
+            </div>
+            <div class="project">
+                <img src="heritage-westlake.jpg" alt="Heritage West Lake">
+                <h3>HERITAGE WEST LAKE</h3>
+                <button class="design-btn">NHẬN THIẾT KẾ</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 360HOME. All rights reserved.</p>
+    </footer>
+</body>
+</html>
