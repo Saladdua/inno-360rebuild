@@ -38,8 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
             slider.style.transform = `translateX(-${index * (100 / totalSlides)}%)`;
         }
     });    
-    
-
+     
     function showNextProject() {
         projects[currentIndex].style.display = "none";
         currentIndex = (currentIndex + 1) % totalProjects;
