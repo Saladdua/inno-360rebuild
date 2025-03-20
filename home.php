@@ -119,8 +119,8 @@ $authenticated = false;
             </div>
     
             <!-- Navigation Arrows -->
-            <button class="prev-btn">&#10094;</button>
-            <button class="next-btn">&#10095;</button>
+            <!-- <button class="prev-btn">&#10094;</button>
+            <button class="next-btn">&#10095;</button> -->
         </div>
     </section>
     
@@ -130,12 +130,13 @@ $authenticated = false;
         <p>&copy; 2025 360HOME. All rights reserved.</p>
     </footer>
 
-    <!-- Login Modal -->
-    <button class="login">ĐĂNG NHẬP</button> <!-- This button opens modal -->
+<!-- Button to open modal -->
+<button class="login">ĐĂNG NHẬP</button>
 
-<div id="loginModal" class="modal">
+<!-- Modal -->
+<div id="loginModal" class="modal" style="display: none;">
     <div class="modal-content">
-        <span class="close-popup">&times;</span> <!-- This button closes modal -->
+        <span class="close-popup">&times;</span> <!-- X button to close modal -->
         <h2>360HOME</h2>
         <p>Đăng nhập vào tài khoản của bạn</p>
         <form id="loginForm">
@@ -157,6 +158,7 @@ $authenticated = false;
         <p>Chưa có tài khoản? <a href="register.php">Đăng ký.</a></p>
     </div>
 </div>
+
 
 </body>
 </html>

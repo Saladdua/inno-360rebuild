@@ -1,149 +1,135 @@
-document.addEventListener("DOMContentLoaded", function() {
-    let currentIndex = 0;
-    const projects = document.querySelectorAll(".project");
-    const totalProjects = projects.length;
-    const sliders = document.querySelectorAll(".project-slider");
+document.addEventListener("DOMContentLoaded", function () {
+  let currentIndex = 0;
+  const projects = document.querySelectorAll(".project");
+  const totalProjects = projects.length;
+  const sliders = document.querySelectorAll(".project-slider");
 
-    sliders.forEach(slider => {
-        let images = slider.querySelectorAll("img");
-        let dotsContainer = slider.parentElement.querySelector(".dots");
-        let index = 0;
+  sliders.forEach((slider) => {
+    let images = slider.querySelectorAll("img");
+    let dotsContainer = slider.parentElement.querySelector(".dots");
+    let index = 0;
 
-        // Create dots dynamically
-        images.forEach((_, i) => {
-            let dot = document.createElement("div");
-            dot.classList.add("dot");
-            if (i === 0) dot.classList.add("active");
-            dot.addEventListener("click", () => {
-                images[index].classList.remove("active");
-                dotsContainer.children[index].classList.remove("active");
-                index = i;
-                images[index].classList.add("active");
-                dotsContainer.children[index].classList.add("active");
-            });
-            dotsContainer.appendChild(dot);
-        });
-
-        function showNextImage() {
-            images[index].classList.remove("active");
-            dotsContainer.children[index].classList.remove("active");
-            index = (index + 1) % images.length;
-            images[index].classList.add("active");
-            dotsContainer.children[index].classList.add("active");
-        }
-
-        images[0].classList.add("active");
-
-        setInterval(showNextImage, 3000);
-    });
-    
-    document.addEventListener("DOMContentLoaded", function () {
-        const loginBtn = document.querySelector(".login"); // Button to open modal
-        const modal = document.getElementById("loginModal"); // Modal container
-        const closeBtn = document.querySelector(".close-popup"); // X button to close modal
-    
-        // Show modal when login button is clicked
-        if (loginBtn && modal) {
-            loginBtn.addEventListener("click", () => {
-                modal.style.display = "flex"; // Show modal
-            });
-        }
-    
-        // Close modal when clicking close button (X)
-        if (closeBtn && modal) {
-            closeBtn.addEventListener("click", () => {
-                modal.style.display = "none"; // Hide modal
-            });
-        }
-    
-        // Close modal when clicking outside the modal content
-        window.addEventListener("click", (event) => {
-            if (event.target === modal) {
-                modal.style.display = "none"; // Hide modal
-            }
-        });
-    });
-    
-    // Carousel navigation
-    const carousel = document.querySelector(".carousel");
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
-
-    let scrollAmount = 0;
-    const scrollStep = 300;
-
-    prevBtn.addEventListener("click", () => {
-        scrollAmount -= scrollStep;
-        if (scrollAmount < 0) scrollAmount = 0;
-        carousel.style.transform = `translateX(-${scrollAmount}px)`;
+    // Create dots dynamically
+    images.forEach((_, i) => {
+      let dot = document.createElement("div");
+      dot.classList.add("dot");
+      if (i === 0) dot.classList.add("active");
+      dot.addEventListener("click", () => {
+        images[index].classList.remove("active");
+        dotsContainer.children[index].classList.remove("active");
+        index = i;
+        images[index].classList.add("active");
+        dotsContainer.children[index].classList.add("active");
+      });
+      dotsContainer.appendChild(dot);
     });
 
-    nextBtn.addEventListener("click", () => {
-        scrollAmount += scrollStep;
-        if (scrollAmount > carousel.scrollWidth - carousel.clientWidth) {
-            scrollAmount = carousel.scrollWidth - carousel.clientWidth;
-        }
-        carousel.style.transform = `translateX(-${scrollAmount}px)`;
+    function showNextImage() {
+      images[index].classList.remove("active");
+      dotsContainer.children[index].classList.remove("active");
+      index = (index + 1) % images.length;
+      images[index].classList.add("active");
+      dotsContainer.children[index].classList.add("active");
+    }
+
+    images[0].classList.add("active");
+
+    setInterval(showNextImage, 3000);
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const loginBtn = document.querySelector(".login"); // Open modal button
+    const modal = document.getElementById("loginModal"); // Modal container
+    const closeBtn = document.querySelector(".close-popup"); // X button to close modal
+
+    // Show modal when login button is clicked
+    loginBtn.addEventListener("click", function () {
+      modal.style.display = "flex";
     });
+
+    // Close modal when clicking the close button (X)
+    closeBtn.addEventListener("click", function () {
+      modal.style.display = "none";
+    });
+
+    // Close modal when clicking outside the modal-content
+    window.addEventListener("click", function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+    // Close modal when clicking outside the box
+    window.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  });
+
+  // Carousel navigation
+  const carousel = document.querySelector(".carousel");
+  const prevBtn = document.querySelector(".prev-btn");
+  const nextBtn = document.querySelector(".next-btn");
+
+  let scrollAmount = 0;
+  const scrollStep = 300;
+
+  prevBtn.addEventListener("click", () => {
+    scrollAmount -= scrollStep;
+    if (scrollAmount < 0) scrollAmount = 0;
+    carousel.style.transform = `translateX(-${scrollAmount}px)`;
+  });
+
+  nextBtn.addEventListener("click", () => {
+    scrollAmount += scrollStep;
+    if (scrollAmount > carousel.scrollWidth - carousel.clientWidth) {
+      scrollAmount = carousel.scrollWidth - carousel.clientWidth;
+    }
+    carousel.style.transform = `translateX(-${scrollAmount}px)`;
+  });
 });
 
-document.getElementById("loginForm").addEventListener("submit", function(event) {
+document
+  .getElementById("loginForm")
+  .addEventListener("submit", function (event) {
     event.preventDefault();
 
     let formData = new FormData(this);
 
     fetch("login.php", {
-        method: "POST",
-        body: formData
+      method: "POST",
+      body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.status === "success") {
-            alert(data.message);
-            window.location.href = "dashboard.php"; // Redirect on success
+          alert(data.message);
+          window.location.href = "dashboard.php"; // Redirect on success
         } else {
-            alert(data.message);
+          alert(data.message);
         }
-    })
-    .catch(error => console.error("Lỗi:", error));
-});
+      })
+      .catch((error) => console.error("Lỗi:", error));
+  });
 
-document.getElementById("registerLink").addEventListener("click", function (event) {
+document
+  .getElementById("registerLink")
+  .addEventListener("click", function (event) {
     event.preventDefault(); // Prevent default link action
     document.getElementById("loginModal").style.display = "none"; // Hide login modal
     window.location.href = "register.php"; // Redirect to register page
-});
+  });
 
 document.addEventListener("DOMContentLoaded", function () {
-    const closeButton = document.querySelector(".close-popup");
-    const popup = document.querySelector(".popup-container");
+  const closeButton = document.querySelector(".close-popup");
+  const popup = document.querySelector(".popup-container");
 
-    if (closeButton && popup) {
-        closeButton.addEventListener("click", function () {
-            popup.style.display = "none";
-        });
-    }
+  if (closeButton && popup) {
+    closeButton.addEventListener("click", function () {
+      popup.style.display = "none";
+    });
+  }
 });
-
 
 // Get elements
-const loginBtn = document.querySelector(".login");
-const modal = document.getElementById("loginModal");
 const closeBtn = document.querySelector(".close");
-
-// Show modal when login button is clicked
-loginBtn.addEventListener("click", () => {
-    modal.style.display = "flex";
-});
-
-// Close modal when clicking close button
-closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-// Close modal when clicking outside the box
-window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-});
