@@ -36,7 +36,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
         setInterval(showNextImage, 3000);
     });
-
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const loginBtn = document.querySelector(".login"); // Button to open modal
+        const modal = document.getElementById("loginModal"); // Modal container
+        const closeBtn = document.querySelector(".close-popup"); // X button to close modal
+    
+        // Show modal when login button is clicked
+        if (loginBtn && modal) {
+            loginBtn.addEventListener("click", () => {
+                modal.style.display = "flex"; // Show modal
+            });
+        }
+    
+        // Close modal when clicking close button (X)
+        if (closeBtn && modal) {
+            closeBtn.addEventListener("click", () => {
+                modal.style.display = "none"; // Hide modal
+            });
+        }
+    
+        // Close modal when clicking outside the modal content
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none"; // Hide modal
+            }
+        });
+    });
+    
     // Carousel navigation
     const carousel = document.querySelector(".carousel");
     const prevBtn = document.querySelector(".prev-btn");
@@ -86,6 +113,18 @@ document.getElementById("registerLink").addEventListener("click", function (even
     document.getElementById("loginModal").style.display = "none"; // Hide login modal
     window.location.href = "register.php"; // Redirect to register page
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const closeButton = document.querySelector(".close-popup");
+    const popup = document.querySelector(".popup-container");
+
+    if (closeButton && popup) {
+        closeButton.addEventListener("click", function () {
+            popup.style.display = "none";
+        });
+    }
+});
+
 
 // Get elements
 const loginBtn = document.querySelector(".login");

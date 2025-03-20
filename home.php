@@ -3,7 +3,17 @@ session_start();
 
 $authenticated = false;
 ?>
-
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="success-message">
+        <?php echo $_SESSION['success']; ?>
+    </div>
+    <script>
+        setTimeout(function() {
+            document.querySelector('.success-message').style.display = 'none';
+        }, 2000); // Hide the success message after 2 seconds
+    </script>
+    <?php unset($_SESSION['success']); // Remove message after displaying ?>
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -121,18 +131,20 @@ $authenticated = false;
     </footer>
 
     <!-- Login Modal -->
+    <button class="login">ĐĂNG NHẬP</button> <!-- This button opens modal -->
+
 <div id="loginModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close-popup">&times;</span> <!-- This button closes modal -->
         <h2>360HOME</h2>
         <p>Đăng nhập vào tài khoản của bạn</p>
         <form id="loginForm">
             <label for="username">Tài khoản hoặc E-mail *</label>
             <input type="text" id="username" name="username" required>
-            
+
             <label for="password">Mật khẩu *</label>
             <input type="password" id="password" name="password" required>
-            
+
             <div class="remember">
                 <input type="checkbox" id="remember">
                 <label for="remember">Ghi nhớ tài khoản</label>
@@ -140,10 +152,11 @@ $authenticated = false;
 
             <button type="submit" class="login-btn">ĐĂNG NHẬP</button>
         </form>
-        
+
         <button class="google-login">Đăng nhập bằng tài khoản Google</button>
         <p>Chưa có tài khoản? <a href="register.php">Đăng ký.</a></p>
     </div>
 </div>
+
 </body>
 </html>
