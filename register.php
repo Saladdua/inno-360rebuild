@@ -57,6 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <button type="submit">Đăng Ký</button>
     </form>
-    <p>Đã có tài khoản? <a href="index.php">Đăng nhập</a></p>
+    <p>Đã có tài khoản? <a href="home.php">Đăng nhập</a></p>
 </body>
 </html>

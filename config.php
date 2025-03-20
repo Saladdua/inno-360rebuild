@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root"; // Change if you set a different user
 $password = ""; // Default XAMPP password is empty
-$dbname = "360home";
+$dbname = "auth360db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
