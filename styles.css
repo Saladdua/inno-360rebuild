@@ -186,8 +186,6 @@ nav {
 }
 
 /* End of Project Section */
-
-
 /* End of slider */
 
 .design-btn {
@@ -214,39 +212,34 @@ footer {
 
 /* Modal Styles */
 .modal {
-    display: none; /* Hidden by default */
+    display: none; /* Initially hidden */
     position: fixed;
-    z-index: 1000;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
 }
 
-/* Centered modal content */
 .modal-content {
     background: white;
     padding: 20px;
-    width: 350px;
-    border-radius: 10px;
+    border-radius: 8px;
+    width: 400px;
     text-align: center;
     position: relative;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Close button */
-.close {
+.close-popup {
     position: absolute;
     top: 10px;
     right: 15px;
     font-size: 24px;
     cursor: pointer;
 }
+
 
 /* Fade-in animation */
 @keyframes fadeIn {
@@ -259,7 +252,6 @@ footer {
         transform: translateY(0);
     }
 }
-
 /* End of Navigation Bar */
 
 /* Background Section */
@@ -281,5 +273,134 @@ footer {
     animation: backgroundFade 20s linear infinite;
     z-index: -1;
 }
-
 /* End of Background Section */
+
+/* Register Form Section */
+/* Full-page background */
+.full-page-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/image/bg-register.jpg'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Send it behind all content */
+}
+.register-container {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.register-image {
+    width: 40%;
+}
+
+.register-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.register-box {
+    width: 800px; /* Adjust width as needed */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures form fields and text are centered */
+    justify-content: center;
+    text-align: center;
+}
+
+.register-box input {
+    width: 100%; /* Makes input fields full width */
+}
+
+.register-form {
+    width: 60%;
+    padding: 30px;
+    text-align: center;
+}
+
+.register-form h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #004A52;
+}
+
+.register-form p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.register-form input {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.register-btn {
+    width: 100%;
+    max-width: 600px;
+    background: #004A52;
+    color: white;
+    padding: 12px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.register-btn:hover {
+    background: #00363D;
+}
+
+.register-form a {
+    color: #004A52;
+    text-decoration: none;
+}
+
+.register-form a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    background: #ffdddd;
+    padding: 10px;
+    border: 1px solid red;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.success-message {
+    color: green;
+    background: #ddffdd;
+    padding: 10px;
+    border: 1px solid green;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* End of Register Form Section */
