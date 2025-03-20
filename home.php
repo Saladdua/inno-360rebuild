@@ -142,7 +142,7 @@ $authenticated = false;
         </form>
         
         <button class="google-login">Đăng nhập bằng tài khoản Google</button>
-        <p>Chưa có tài khoản? <a href="/register.php">Đăng ký.</a></p>
+        <p>Chưa có tài khoản? <a href="register.php">Đăng ký.</a></p>
     </div>
 </div>
 </body>

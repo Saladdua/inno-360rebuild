@@ -81,6 +81,12 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     .catch(error => console.error("Lỗi:", error));
 });
 
+document.getElementById("registerLink").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link action
+    document.getElementById("loginModal").style.display = "none"; // Hide login modal
+    window.location.href = "register.php"; // Redirect to register page
+});
+
 // Get elements
 const loginBtn = document.querySelector(".login");
 const modal = document.getElementById("loginModal");
