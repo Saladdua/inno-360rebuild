@@ -1,23 +1,27 @@
-import Image from "next/image"
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import { Calendar, MapPin, SquareIcon as SquareFootage } from "lucide-react"
-import { getProjectBySlug, getProjects } from "@/lib/projects"
-import { formatDate } from "@/lib/utils"
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { Calendar, MapPin, SquareIcon as SquareFootage } from "lucide-react";
+import { getProjectBySlug, getProjects } from "@/lib/projects";
+import { formatDate } from "@/lib/utils";
+import DesignRequestButton from "@/components/design-request-button";
 
 export async function generateStaticParams() {
-  const projects = await getProjects()
+  const projects = await getProjects();
 
   return projects.map((project) => ({
     slug: project.slug,
-  }))
+  }));
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = await getProjectBySlug(params.slug)
+export default async function ProjectPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const project = await getProjectBySlug(params.slug);
 
   if (!project) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -53,7 +57,9 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             </div>
 
             <div className="prose max-w-none mb-8">
-              <p className="text-gray-700 whitespace-pre-line">{project.description}</p>
+              <p className="text-gray-700 whitespace-pre-line">
+                {project.description}
+              </p>
             </div>
 
             <div className="mb-8">
@@ -73,20 +79,19 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                 </div>
                 <div className="flex flex-col">
                   <span className="text-gray-500">Hoàn thành</span>
-                  <span className="font-medium">{formatDate(project.completionDate)}</span>
+                  <span className="font-medium">
+                    {formatDate(project.completionDate)}
+                  </span>
                 </div>
               </div>
             </div>
 
             <div className="flex justify-center">
-              <Link href="/lien-he" className="btn-primary">
-                NHẬN THIẾT KẾ TƯƠNG TỰ
-              </Link>
+              <DesignRequestButton projectSlug={project.slug} />
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

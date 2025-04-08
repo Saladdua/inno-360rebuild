@@ -1,20 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight, Check, ArrowRight } from "lucide-react";
 import ProjectCarousel from "@/components/project-carousel";
 import NewsCard from "@/components/news-card";
 import { getProjects } from "@/lib/projects";
+import PartnerLogos from "@/components/partner-logos";
 import { getLatestNews } from "@/lib/news";
+import FloatingContactButtons from "@/components/floating-contact-buttons";
 
 export default async function Home() {
   const projects = await getProjects();
   const latestNews = await getLatestNews(4);
 
+  <head>
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
+  </head>;
   return (
     <div>
       {/* Hero Section */}
       <section className="relative h-[600px]">
         <Image
-          src="/placeholder.svg?height=600&width=1920"
+          src="/hero-background.jpg"
           alt="Interior design"
           fill
           className="object-cover"
@@ -40,6 +46,11 @@ export default async function Home() {
         <div className="container mx-auto px-4">
           <h2 className="section-title">Dự án tiêu biểu</h2>
           <ProjectCarousel projects={projects} />
+        </div>
+        <div className="text-center mt-8">
+          <Link href="/du-an" className="btn-primary">
+            XEM TẤT CẢ DỰ ÁN
+          </Link>
         </div>
       </section>
 
@@ -81,9 +92,9 @@ export default async function Home() {
           <h2 className="section-title">Dịch vụ của chúng tôi</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="w-16 h-16 bg-[#8bc34a] rounded-full flex items-center justify-center mb-4 mx-auto">
+              <div className="w-16 h-16 bg-[#f5f5f5] rounded-full flex items-center justify-center mb-4 mx-auto">
                 <Image
-                  src="/placeholder.svg?height=40&width=40"
+                  src="/service-1.png?height=40&width=40"
                   alt="Design"
                   width={40}
                   height={40}
@@ -98,9 +109,9 @@ export default async function Home() {
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="w-16 h-16 bg-[#8bc34a] rounded-full flex items-center justify-center mb-4 mx-auto">
+              <div className="w-16 h-16 bg-[#f5f5f5] rounded-full flex items-center justify-center mb-4 mx-auto">
                 <Image
-                  src="/placeholder.svg?height=40&width=40"
+                  src="/service-2.png?height=40&width=40"
                   alt="Construction"
                   width={40}
                   height={40}
@@ -115,9 +126,9 @@ export default async function Home() {
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="w-16 h-16 bg-[#8bc34a] rounded-full flex items-center justify-center mb-4 mx-auto">
+              <div className="w-16 h-16 bg-[#f5f5f5] rounded-full flex items-center justify-center mb-4 mx-auto">
                 <Image
-                  src="/placeholder.svg?height=40&width=40"
+                  src="/service-3.png?height=40&width=40"
                   alt="Consultation"
                   width={40}
                   height={40}
@@ -135,8 +146,23 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Latest News Section */}
+      {/* Partners Section */}
       <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900">
+              Đối tác của chúng tôi
+            </h2>
+            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+              Hợp tác với các thương hiệu uy tín trong và ngoài nước
+            </p>
+          </div>
+          <PartnerLogos />
+        </div>
+      </section>
+
+      {/* Latest News Section */}
+      <section className="py-16 bg-[#f5f5f5]">
         <div className="container mx-auto px-4">
           <h2 className="section-title">Tin tức mới nhất</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -151,6 +177,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* Floating Contact Buttons */}
+      <FloatingContactButtons />
 
       {/* CTA Section */}
       <section className="py-16 bg-[#8bc34a] text-white">

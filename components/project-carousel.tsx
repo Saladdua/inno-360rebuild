@@ -1,33 +1,39 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useCallback } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import type { Project } from "@/types/project"
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Project } from "@/types/project";
 
 interface ProjectCarouselProps {
-  projects: Project[]
-  itemsPerPage?: number
+  projects: Project[];
+  itemsPerPage?: number;
 }
 
-export default function ProjectCarousel({ projects, itemsPerPage = 3 }: ProjectCarouselProps) {
-  const [currentPage, setCurrentPage] = useState(0)
-  const [totalPages, setTotalPages] = useState(0)
+export default function ProjectCarousel({
+  projects,
+  itemsPerPage = 3,
+}: ProjectCarouselProps) {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    setTotalPages(Math.ceil(projects.length / itemsPerPage))
-  }, [projects, itemsPerPage])
+    setTotalPages(Math.ceil(projects.length / itemsPerPage));
+  }, [projects, itemsPerPage]);
 
   const nextPage = useCallback(() => {
-    setCurrentPage((prev) => (prev + 1) % totalPages)
-  }, [totalPages])
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  }, [totalPages]);
 
   const prevPage = useCallback(() => {
-    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages)
-  }, [totalPages])
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  }, [totalPages]);
 
-  const visibleProjects = projects.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
+  const visibleProjects = projects.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
 
   return (
     <div className="relative">
@@ -35,13 +41,23 @@ export default function ProjectCarousel({ projects, itemsPerPage = 3 }: ProjectC
         {visibleProjects.map((project) => (
           <div key={project.id} className="project-card">
             <div className="relative h-64 w-full">
-              <Image src={project.imageUrl || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
+              <Image
+                src={project.imageUrl || "/placeholder.svg"}
+                alt={project.title}
+                fill
+                className="object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4">
-                <h3 className="text-white font-bold text-xl">{project.title}</h3>
+                <h3 className="text-white font-bold text-xl">
+                  {project.title}
+                </h3>
               </div>
             </div>
             <div className="p-4 text-center">
-              <Link href={`/du-an/${project.slug}`} className="btn-primary inline-block">
+              <Link
+                href={`/du-an/${project.slug}`}
+                className="btn-primary inline-block"
+              >
                 NHẬN THIẾT KẾ
               </Link>
             </div>
@@ -77,6 +93,5 @@ export default function ProjectCarousel({ projects, itemsPerPage = 3 }: ProjectC
         ))}
       </div>
     </div>
-  )
+  );
 }
-

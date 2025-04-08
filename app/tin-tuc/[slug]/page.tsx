@@ -1,30 +1,40 @@
-import Image from "next/image"
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import { getNewsBySlug, getLatestNews } from "@/lib/news"
-import { formatDate } from "@/lib/utils"
-import NewsCard from "@/components/news-card"
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getNewsBySlug, getLatestNews } from "@/lib/news";
+import { formatDate } from "@/lib/utils";
+import NewsCard from "@/components/news-card";
 
-export default async function NewsDetailPage({ params }: { params: { slug: string } }) {
-  const news = await getNewsBySlug(params.slug)
+export default async function NewsDetailPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const news = await getNewsBySlug(params.slug);
 
   if (!news) {
-    notFound()
+    notFound();
   }
 
-  const relatedNews = await getLatestNews(4)
+  const relatedNews = await getLatestNews(4);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4">
         <div className="bg-white rounded-lg shadow-md overflow-hidden mb-12">
           <div className="relative h-[400px] w-full">
-            <Image src={news.imageUrl || "/placeholder.svg"} alt={news.title} fill className="object-cover" priority />
+            <Image
+              src={news.imageUrl || "/placeholder.svg"}
+              alt={news.title}
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
 
           <div className="p-6 md:p-8">
             <div className="mb-4 text-gray-500">
-              <span>{formatDate(news.createdAt)}</span>
+              <span>{formatDate(news.created_at)}</span>
               <span className="mx-2">•</span>
               <span>Tác giả: {news.author}</span>
             </div>
@@ -56,6 +66,5 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
         </div>
       </div>
     </div>
-  )
+  );
 }
-
