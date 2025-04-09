@@ -4,6 +4,7 @@ import { Calendar, MapPin, SquareIcon as SquareFootage } from "lucide-react";
 import { getProjectBySlug, getProjects } from "@/lib/projects";
 import { formatDate } from "@/lib/utils";
 import DesignRequestButton from "@/components/design-request-button";
+import FloatingContactButtons from "@/components/floating-contact-buttons";
 
 export async function generateStaticParams() {
   const projects = await getProjects();
@@ -24,17 +25,32 @@ export default async function ProjectPage({
     notFound();
   }
 
+  // Function to determine if a URL is external or a placeholder
+  const getImageSrc = (url: string | null | undefined) => {
+    if (!url) return "/placeholder.svg?height=600&width=800";
+
+    // If it's already a placeholder, return as is
+    if (url.startsWith("/placeholder.svg")) return url;
+
+    // Return the actual URL
+    return url;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4">
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="relative h-[400px] w-full">
             <Image
-              src={project.imageUrl || "/placeholder.svg"}
+              src={getImageSrc(project.imageUrl) || "/placeholder.svg"}
               alt={project.title}
               fill
               className="object-cover"
               priority
+              unoptimized={
+                !!project.imageUrl &&
+                !project.imageUrl.startsWith("/placeholder.svg")
+              }
             />
           </div>
 
@@ -48,11 +64,7 @@ export default async function ProjectPage({
               </div>
               <div className="flex items-center text-gray-600">
                 <SquareFootage size={18} className="mr-2 text-[#8bc34a]" />
-                {project.area} m²
-              </div>
-              <div className="flex items-center text-gray-600">
-                <Calendar size={18} className="mr-2 text-[#8bc34a]" />
-                Hoàn thành: {formatDate(project.completionDate)}
+                {project.area.toFixed(1)} ha
               </div>
             </div>
 
@@ -66,7 +78,7 @@ export default async function ProjectPage({
               <h2 className="text-xl font-bold mb-4">Thông tin dự án</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="flex flex-col">
-                  <span className="text-gray-500">Khách hàng</span>
+                  <span className="text-gray-500">Chủ đầu tư</span>
                   <span className="font-medium">{project.client}</span>
                 </div>
                 <div className="flex flex-col">
@@ -75,12 +87,8 @@ export default async function ProjectPage({
                 </div>
                 <div className="flex flex-col">
                   <span className="text-gray-500">Diện tích</span>
-                  <span className="font-medium">{project.area} m²</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-gray-500">Hoàn thành</span>
                   <span className="font-medium">
-                    {formatDate(project.completionDate)}
+                    {project.area.toFixed(1)} ha
                   </span>
                 </div>
               </div>
@@ -92,6 +100,8 @@ export default async function ProjectPage({
           </div>
         </div>
       </div>
+      {/* Floating Contact Buttons */}
+      <FloatingContactButtons />
     </div>
   );
 }

@@ -32,7 +32,7 @@ export default function Header() {
             Lý do lựa chọn 360HOME
           </Link>
           <Link
-            href="/xu-huong-thiet-ke-noi-that"
+            href="https://360home.vn/xu-huong-thiet-ke-noi-that/"
             className="nav-link uppercase text-sm"
           >
             Xu hướng thiết kế nội thất
@@ -40,10 +40,16 @@ export default function Header() {
           <Link href="/du-an" className="nav-link uppercase text-sm">
             Dự án
           </Link>
-          <Link href="/tin-tuc" className="nav-link uppercase text-sm">
+          <Link
+            href="https://360home.vn/tin-tuc"
+            className="nav-link uppercase text-sm"
+          >
             Tin tức
           </Link>
-          <Link href="/danh-cho-kts" className="nav-link uppercase text-sm">
+          <Link
+            href="https://360home.vn/danh-cho-kts/"
+            className="nav-link uppercase text-sm"
+          >
             Dành cho KTS
           </Link>
         </nav>
@@ -55,22 +61,25 @@ export default function Header() {
 
           {session ? (
             <div className="relative group">
-              <button className="btn-secondary text-sm flex items-center">
+              <button className="btn-secondary text-sm flex items-center py-2 px-4">
                 {session.user?.name || "Tài khoản"}
               </button>
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20 hidden group-hover:block">
-                <Link
-                  href="/profile"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Thông tin cá nhân
-                </Link>
-                <button
-                  onClick={() => signOut()}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Đăng xuất
-                </button>
+              {/* Increased hitbox by adding padding and making the dropdown div larger */}
+              <div className="absolute right-0 mt-0 pt-2 w-48 group-hover:block hidden">
+                <div className="bg-white rounded-md shadow-lg overflow-hidden z-20 border border-gray-200">
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Thông tin cá nhân
+                  </Link>
+                  <button
+                    onClick={() => signOut()}
+                    className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Đăng xuất
+                  </button>
+                </div>
               </div>
             </div>
           ) : (

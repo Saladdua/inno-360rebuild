@@ -63,3 +63,35 @@ body {
   @apply bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow;
 }
 
+/* Add fade transition for project images */
+.fade-transition {
+  @apply transition-opacity duration-1000 ease-in-out;
+}
+
+.bg-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.benefit-box {
+  transition: all 0.3s ease;
+}
+
+.benefit-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.section-title-underline {
+  position: relative;
+}
+
+.section-title-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #8bc34a;
+}

@@ -7,7 +7,7 @@ import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2 } from "lucide-react";
+import { Loader2, Eye, EyeOff } from "lucide-react"; // Import icons for show/hide
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Email không hợp lệ" }),
@@ -20,6 +20,7 @@ export default function LoginPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
 
   const {
     register,
@@ -67,7 +68,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div
+      className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+      style={{
+        backgroundImage:
+          "url('https://file.hstatic.net/200000296482/file/majestic-2_86a6607b60ee44ed9cff6eb6a8f25368.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-3xl font-bold">Đăng nhập</h1>
@@ -110,13 +119,22 @@ export default function LoginPage() {
               >
                 Mật khẩu
               </label>
-              <input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                {...register("password")}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8bc34a]"
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"} // Toggle input type
+                  autoComplete="current-password"
+                  {...register("password")}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8bc34a]"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)} // Toggle visibility
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
               {errors.password && (
                 <p className="mt-1 text-sm text-red-600">
                   {errors.password.message}
@@ -125,7 +143,7 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
                 id="remember-me"
@@ -149,7 +167,7 @@ export default function LoginPage() {
                 Quên mật khẩu?
               </Link>
             </div>
-          </div>
+          </div> */}
 
           <div>
             <button
@@ -169,7 +187,7 @@ export default function LoginPage() {
           </div>
         </form>
 
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300" />
@@ -210,7 +228,7 @@ export default function LoginPage() {
               Google
             </button>
           </div>
-        </div>
+        </div> */}
 
         <div className="text-center mt-4">
           <p className="text-sm text-gray-600">

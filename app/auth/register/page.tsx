@@ -1,32 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { signIn } from "next-auth/react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { Loader2 } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Loader2 } from "lucide-react";
 
 const registerSchema = z
   .object({
     name: z.string().min(2, { message: "Tên phải có ít nhất 2 ký tự" }),
     email: z.string().email({ message: "Email không hợp lệ" }),
-    password: z.string().min(6, { message: "Mật khẩu phải có ít nhất 6 ký tự" }),
+    password: z
+      .string()
+      .min(6, { message: "Mật khẩu phải có ít nhất 6 ký tự" }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Mật khẩu không khớp",
     path: ["confirmPassword"],
-  })
+  });
 
-type RegisterFormValues = z.infer<typeof registerSchema>
+type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export default function RegisterPage() {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState("")
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const {
     register,
@@ -34,11 +36,11 @@ export default function RegisterPage() {
     formState: { errors },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
-  })
+  });
 
   const onSubmit = async (data: RegisterFormValues) => {
-    setIsLoading(true)
-    setError("")
+    setIsLoading(true);
+    setError("");
 
     try {
       const response = await fetch("/api/auth/register", {
@@ -51,13 +53,13 @@ export default function RegisterPage() {
           email: data.email,
           password: data.password,
         }),
-      })
+      });
 
-      const result = await response.json()
+      const result = await response.json();
 
       if (!response.ok) {
-        setError(result.message || "Đã xảy ra lỗi khi đăng ký")
-        return
+        setError(result.message || "Đã xảy ra lỗi khi đăng ký");
+        return;
       }
 
       // Auto login after successful registration
@@ -65,43 +67,58 @@ export default function RegisterPage() {
         redirect: false,
         email: data.email,
         password: data.password,
-      })
+      });
 
-      router.push("/")
-      router.refresh()
+      router.push("/");
+      router.refresh();
     } catch (error) {
-      setError("Đã xảy ra lỗi. Vui lòng thử lại sau.")
+      setError("Đã xảy ra lỗi. Vui lòng thử lại sau.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleGoogleLogin = async () => {
-    setIsLoading(true)
-    setError("")
+    setIsLoading(true);
+    setError("");
 
     try {
-      await signIn("google", { callbackUrl: "/" })
+      await signIn("google", { callbackUrl: "/" });
     } catch (error) {
-      setError("Đã xảy ra lỗi khi đăng nhập với Google")
-      setIsLoading(false)
+      setError("Đã xảy ra lỗi khi đăng nhập với Google");
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div
+      className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+      style={{
+        backgroundImage:
+          "url('https://file.hstatic.net/200000296482/file/majestic-2_86a6607b60ee44ed9cff6eb6a8f25368.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-3xl font-bold">Đăng ký</h1>
-          <p className="mt-2 text-gray-600">Tạo tài khoản để trải nghiệm dịch vụ của 360HOME</p>
+          <p className="mt-2 text-gray-600">
+            Tạo tài khoản để trải nghiệm dịch vụ của 360HOME
+          </p>
         </div>
 
-        {error && <div className="p-4 bg-red-50 text-red-700 rounded-md">{error}</div>}
+        {error && (
+          <div className="p-4 bg-red-50 text-red-700 rounded-md">{error}</div>
+        )}
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Họ và tên
               </label>
               <input
@@ -111,11 +128,18 @@ export default function RegisterPage() {
                 {...register("name")}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8bc34a]"
               />
-              {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
+              {errors.name && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Email
               </label>
               <input
@@ -125,11 +149,18 @@ export default function RegisterPage() {
                 {...register("email")}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8bc34a]"
               />
-              {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Mật khẩu
               </label>
               <input
@@ -139,11 +170,18 @@ export default function RegisterPage() {
                 {...register("password")}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8bc34a]"
               />
-              {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>}
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Xác nhận mật khẩu
               </label>
               <input
@@ -153,12 +191,20 @@ export default function RegisterPage() {
                 {...register("confirmPassword")}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8bc34a]"
               />
-              {errors.confirmPassword && <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>}
+              {errors.confirmPassword && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </div>
           </div>
 
           <div>
-            <button type="submit" disabled={isLoading} className="btn-primary w-full flex justify-center items-center">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="btn-primary w-full flex justify-center items-center"
+            >
               {isLoading ? (
                 <>
                   <Loader2 size={20} className="mr-2 animate-spin" />
@@ -171,13 +217,15 @@ export default function RegisterPage() {
           </div>
         </form>
 
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Hoặc đăng ký với</span>
+              <span className="px-2 bg-white text-gray-500">
+                Hoặc đăng ký với
+              </span>
             </div>
           </div>
 
@@ -210,18 +258,20 @@ export default function RegisterPage() {
               Google
             </button>
           </div>
-        </div>
+        </div> */}
 
         <div className="text-center mt-4">
           <p className="text-sm text-gray-600">
             Đã có tài khoản?{" "}
-            <Link href="/auth/login" className="text-[#8bc34a] hover:text-[#7cb342]">
+            <Link
+              href="/auth/login"
+              className="text-[#8bc34a] hover:text-[#7cb342]"
+            >
               Đăng nhập
             </Link>
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

@@ -1,18 +1,22 @@
-import { Suspense } from "react"
-import Link from "next/link"
-import NewsCard from "@/components/news-card"
-import { getNewsPaginated } from "@/lib/news"
+import { Suspense } from "react";
+import Link from "next/link";
+import NewsCard from "@/components/news-card";
+import { ChevronRight, Mail, Phone, MessageSquare } from "lucide-react";
+import { getNewsPaginated } from "@/lib/news";
+import FloatingContactButtons from "@/components/floating-contact-buttons";
 
 export default async function NewsPage({
   searchParams,
 }: {
-  searchParams: { page?: string }
+  searchParams: { page?: string };
 }) {
-  const currentPage = Number(searchParams.page) || 1
-  const limit = 8
+  const currentPage = Number(searchParams.page) || 1;
+  const limit = 8;
 
-  const { news, total } = await getNewsPaginated(currentPage, limit)
-  const totalPages = Math.ceil(total / limit)
+  const { news, total } = await getNewsPaginated(currentPage, limit);
+  const totalPages = Math.ceil(total / limit);
+
+  const sortedNews = news.sort((a, b) => a.id - b.id);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -21,7 +25,7 @@ export default async function NewsPage({
 
         <Suspense fallback={<div>Đang tải...</div>}>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {news.map((item) => (
+            {sortedNews.map((item) => (
               <NewsCard key={item.id} news={item} />
             ))}
           </div>
@@ -66,7 +70,8 @@ export default async function NewsPage({
           )}
         </Suspense>
       </div>
+      {/* Floating Contact Buttons */}
+      <FloatingContactButtons />
     </div>
-  )
+  );
 }
-

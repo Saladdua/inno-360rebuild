@@ -10,7 +10,7 @@ import { AuthProvider } from "@/components/auth-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "360Home",
+  title: "360HOME - Nền tảng kết nối hoàn thiện nội thất toàn diện",
   description: "Giải pháp hoàn hảo, tối ưu chi phí cho ngôi nhà của bạn!",
 };
 
@@ -21,6 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.png" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
+      </head>
       <body className={inter.className}>
         <AuthProvider>
           <ThemeProvider
@@ -38,5 +42,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-import "./globals.css";

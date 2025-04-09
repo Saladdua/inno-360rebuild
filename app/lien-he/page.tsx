@@ -1,4 +1,5 @@
 import ContactForm from "@/components/contact-form";
+import FloatingContactButtons from "@/components/floating-contact-buttons";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export default function ContactPage() {
@@ -86,6 +87,8 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+      {/* Floating Contact Buttons */}
+      <FloatingContactButtons />
     </div>
   );
 }

@@ -8,17 +8,17 @@ import PartnerLogos from "@/components/partner-logos";
 import { getLatestNews } from "@/lib/news";
 import FloatingContactButtons from "@/components/floating-contact-buttons";
 
+export const revalidate = 0; // Disable caching for this page
+
 export default async function Home() {
   const projects = await getProjects();
   const latestNews = await getLatestNews(4);
 
-  <head>
-    <link rel="icon" type="image/x-icon" href="/favicon.png" />
-  </head>;
   return (
     <div>
       {/* Hero Section */}
       <section className="relative h-[600px]">
+        <link rel="icon" type="image/x-icon" href="/favicon.png" />
         <Image
           src="/hero-background.jpg"
           alt="Interior design"
@@ -76,7 +76,7 @@ export default async function Home() {
             </div>
             <div className="relative h-[400px]">
               <Image
-                src="/placeholder.svg?height=400&width=600"
+                src="/about-4.jpg"
                 alt="About 360HOME"
                 fill
                 className="object-cover rounded-lg"

@@ -1,8 +1,8 @@
-import type { NextAuthOptions } from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import CredentialsProvider from "next-auth/providers/credentials"
-import { compare } from "bcrypt"
-import { executeQuery } from "@/lib/db"
+import type { NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { compare } from "bcrypt";
+import { executeQuery } from "@/lib/db";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -18,34 +18,37 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null
+          return null;
         }
 
         try {
           const users = (await executeQuery({
             query: "SELECT * FROM users WHERE email = ?",
             values: [credentials.email],
-          })) as any[]
+          })) as any[];
 
           if (users.length === 0) {
-            return null
+            return null;
           }
 
-          const user = users[0]
-          const isPasswordValid = await compare(credentials.password, user.password)
+          const user = users[0];
+          const isPasswordValid = await compare(
+            credentials.password,
+            user.password
+          );
 
           if (!isPasswordValid) {
-            return null
+            return null;
           }
 
           return {
             id: user.id.toString(),
             name: user.name,
             email: user.email,
-          }
+          };
         } catch (error) {
-          console.error("Error during authentication:", error)
-          return null
+          console.error("Error during authentication:", error);
+          return null;
         }
       },
     }),
@@ -58,20 +61,19 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id
+        token.id = user.id;
       }
-      return token
+      return token;
     },
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.id as string
+        session.user.id = token.id as string;
       }
-      return session
+      return session;
     },
   },
   session: {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
-}
-
+};

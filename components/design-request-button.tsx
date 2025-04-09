@@ -54,7 +54,7 @@ export default function DesignRequestButton({
         href="/auth/login?callbackUrl=/du-an/${projectSlug}"
         className="btn-primary"
       >
-        ĐĂNG NHẬP ĐỂ NHẬN THIẾT KẾ TƯƠNG TỰ
+        ĐĂNG NHẬP ĐỂ NHẬN THIẾT KẾ
       </Link>
     );
   }

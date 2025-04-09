@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { executeQuery } from "@/lib/db";
+import { sendEmail } from "@/lib/email";
 
 export async function POST(request: Request) {
   try {
@@ -21,36 +21,11 @@ export async function POST(request: Request) {
       values: [name, email, phone, message],
     });
 
-    // Create email transporter with detailed logging
-    const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_SERVER_HOST,
-      port: Number(process.env.EMAIL_SERVER_PORT),
-      secure: Number(process.env.EMAIL_SERVER_PORT) === 465, // true for 465, false for other ports
-      auth: {
-        user: process.env.EMAIL_SERVER_USER,
-        pass: process.env.EMAIL_SERVER_PASSWORD,
-      },
-      debug: true, // Enable debug output
-      logger: true, // Log information about the email sending process
-    });
+    const contactEmail =
+      process.env.CONTACT_EMAIL || "minhnghia14603@gmail.com";
 
-    // Verify connection configuration
-    try {
-      await transporter.verify();
-      console.log("Email server connection verified successfully");
-    } catch (verifyError) {
-      console.error(
-        "Email server connection verification failed:",
-        verifyError
-      );
-      // Still continue to try sending the email
-    }
-
-    const contactEmail = process.env.CONTACT_EMAIL || "info@360home.vn";
-
-    // Send email with detailed content
-    const mailOptions = {
-      from: process.env.EMAIL_FROM,
+    // Send email using our helper function
+    const emailResult = await sendEmail({
       to: contactEmail,
       subject: "Liên hệ mới từ website 360HOME",
       html: `
@@ -61,19 +36,20 @@ export async function POST(request: Request) {
         <p><strong>Tin nhắn:</strong></p>
         <p>${message}</p>
       `,
-    };
+    });
 
-    console.log(
-      "Attempting to send email with options:",
-      JSON.stringify({
-        from: mailOptions.from,
-        to: mailOptions.to,
-        subject: mailOptions.subject,
-      })
-    );
-
-    const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully:", info.messageId);
+    if (!emailResult.success) {
+      console.error("Failed to send email:", emailResult.error);
+      // Still return success to the user, but log the error
+      return NextResponse.json(
+        {
+          message:
+            "Tin nhắn đã được lưu thành công, nhưng có lỗi khi gửi email.",
+          emailSent: false,
+        },
+        { status: 200 }
+      );
+    }
 
     return NextResponse.json(
       {

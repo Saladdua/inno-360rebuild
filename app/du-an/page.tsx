@@ -1,18 +1,19 @@
-import { Suspense } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { getProjectsPaginated } from "@/lib/projects"
+import { Suspense } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { getProjectsPaginated } from "@/lib/projects";
+import FloatingContactButtons from "@/components/floating-contact-buttons";
 
 export default async function ProjectsPage({
   searchParams,
 }: {
-  searchParams: { page?: string }
+  searchParams: { page?: string };
 }) {
-  const currentPage = Number(searchParams.page) || 1
-  const limit = 9
+  const currentPage = Number(searchParams.page) || 1;
+  const limit = 9;
 
-  const { projects, total } = await getProjectsPaginated(currentPage, limit)
-  const totalPages = Math.ceil(total / limit)
+  const { projects, total } = await getProjectsPaginated(currentPage, limit);
+  const totalPages = Math.ceil(total / limit);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -35,11 +36,15 @@ export default async function ProjectsPage({
                 </Link>
                 <div className="p-4">
                   <Link href={`/du-an/${project.slug}`}>
-                    <h2 className="font-bold text-xl mb-2 hover:text-[#8bc34a] transition-colors">{project.title}</h2>
+                    <h2 className="font-bold text-xl mb-2 hover:text-[#8bc34a] transition-colors">
+                      {project.title}
+                    </h2>
                   </Link>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
+                  <p className="text-gray-600 mb-4 line-clamp-2">
+                    {project.description}
+                  </p>
                   <div className="flex justify-between text-sm text-gray-500">
-                    <span>Diện tích: {project.area} m²</span>
+                    <span>Diện tích: {project.area.toFixed(1)} ha</span>
                     <span>{project.location}</span>
                   </div>
                 </div>
@@ -87,7 +92,8 @@ export default async function ProjectsPage({
           )}
         </Suspense>
       </div>
+      {/* Floating Contact Buttons */}
+      <FloatingContactButtons />
     </div>
-  )
+  );
 }
-

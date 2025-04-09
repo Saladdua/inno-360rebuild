@@ -4,7 +4,8 @@ import type { News } from "@/types/news";
 export async function getLatestNews(limit = 4): Promise<News[]> {
   try {
     const news = await executeQuery<News[]>({
-      query: "SELECT * FROM news ORDER BY created_at DESC LIMIT ?",
+      query:
+        "SELECT id, title, slug, content, excerpt, image_url as imageUrl, author, created_at as createdAt, updated_at as updatedAt FROM news ORDER BY created_at DESC LIMIT ?",
       values: [limit],
     });
     return news;
@@ -17,7 +18,8 @@ export async function getLatestNews(limit = 4): Promise<News[]> {
 export async function getNewsBySlug(slug: string): Promise<News | null> {
   try {
     const news = await executeQuery<News[]>({
-      query: "SELECT * FROM news WHERE slug = ?",
+      query:
+        "SELECT id, title, slug, content, excerpt, image_url as imageUrl, author, created_at as createdAt, updated_at as updatedAt FROM news WHERE slug = ?",
       values: [slug],
     });
     return news.length > 0 ? news[0] : null;
@@ -35,7 +37,8 @@ export async function getNewsPaginated(
     const offset = (page - 1) * limit;
 
     const news = await executeQuery<News[]>({
-      query: "SELECT * FROM news ORDER BY created_at DESC LIMIT ? OFFSET ?",
+      query:
+        "SELECT id, title, slug, content, excerpt, image_url as imageUrl, author, created_at as createdAt, updated_at as updatedAt FROM news ORDER BY created_at DESC LIMIT ? OFFSET ?",
       values: [limit, offset],
     });
 
@@ -53,12 +56,12 @@ export async function getNewsPaginated(
 }
 
 export async function createNews(
-  newsData: Omit<News, "id" | "created_at" | "updated_at">
+  newsData: Omit<News, "id" | "createdAt" | "updatedAt">
 ): Promise<number> {
   try {
     const result = await executeQuery<{ insertId: number }>({
       query: `
-        INSERT INTO news (title, slug, content, excerpt, imageUrl, author)
+        INSERT INTO news (title, slug, content, excerpt, image_url, author)
         VALUES (?, ?, ?, ?, ?, ?)
       `,
       values: [
@@ -80,7 +83,7 @@ export async function createNews(
 
 export async function updateNews(
   id: number,
-  newsData: Partial<Omit<News, "id" | "created_at" | "updated_at">>
+  newsData: Partial<Omit<News, "id" | "createdAt" | "updatedAt">>
 ): Promise<boolean> {
   try {
     const fields = Object.keys(newsData);
@@ -88,7 +91,13 @@ export async function updateNews(
 
     if (fields.length === 0) return false;
 
-    const setClause = fields.map((field) => `${field} = ?`).join(", ");
+    // Convert camelCase to snake_case for database column names
+    const dbFields = fields.map((field) => {
+      if (field === "imageUrl") return "image_url";
+      return field;
+    });
+
+    const setClause = dbFields.map((field) => `${field} = ?`).join(", ");
 
     await executeQuery({
       query: `UPDATE news SET ${setClause}, updated_at = NOW() WHERE id = ?`,
