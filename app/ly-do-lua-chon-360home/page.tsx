@@ -15,7 +15,7 @@ export default function AboutPage() {
     {
       id: 1,
       title: "NHÀ THẦU THI CÔNG",
-      icon: "/why-choose-1.png",
+      icon: "https://360home.vn/wp-content/uploads/2023/03/Person-at-Home.png",
       benefits: [
         "Được kết nối với chủ nhà để cung cấp dịch vụ thi công",
         "Tiết kiệm chi phí do thi công theo dự án trong điểm",
@@ -24,7 +24,7 @@ export default function AboutPage() {
     {
       id: 2,
       title: "TƯ VẤN THIẾT KẾ",
-      icon: "/why-choose-2.png",
+      icon: "https://360home.vn/wp-content/uploads/2023/03/Salary-male.png",
       benefits: [
         "Tiếp cận kho thư viện thiết kế miễn phí",
         "Thiết kế nhanh hơn",
@@ -36,7 +36,7 @@ export default function AboutPage() {
     {
       id: 3,
       title: "CHỦ NHÀ",
-      icon: "/why-choose-3.png",
+      icon: "https://360home.vn/wp-content/uploads/2023/03/Admin-Settings-Male.png",
       benefits: [
         "Thỏa sức xem thiết kế căn hộ tương lai của mình",
         "Tặng thiết kế miễn phí",
@@ -48,7 +48,7 @@ export default function AboutPage() {
     {
       id: 4,
       title: "CHỦ ĐẦU TƯ DỰ ÁN",
-      icon: "/why-choose-4.png",
+      icon: "https://360home.vn/wp-content/uploads/2023/03/Construction.png",
       benefits: [
         "Làm phong phú bộ tài liệu bán hàng",
         "Đồng hành cùng CĐT trong việc quảng bá sản phẩm tới khách hàng",
@@ -58,7 +58,7 @@ export default function AboutPage() {
     {
       id: 5,
       title: "ĐƠN VỊ CUNG ỨNG",
-      icon: "/why-choose-5.png",
+      icon: "https://360home.vn/wp-content/uploads/2023/03/Worker.png",
       benefits: [
         "Thúc đẩy bán hàng tốt hơn",
         "Được tham gia vào chợ thương mại điện tử 360Market",
@@ -84,7 +84,7 @@ export default function AboutPage() {
 
       {/* Stakeholders Section */}
       <StakeholderBoxes
-        backgroundImage="/about-background.png"
+        backgroundImage="https://360home.vn/wp-content/uploads/2023/05/DSC7437-min-scaled.jpg"
         title="360HOME"
         subtitle="Nền tảng kết nối thông minh giữa các bên đối tác"
       />
@@ -117,7 +117,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-[500px] overflow-hidden shadow-xl">
               <Image
-                src="/about-1.jpg"
+                src="https://cdn.mohd.it/cdn-cgi/image/format=auto/media/catalog/product/h/u/hudson-vlaley-ace-suspension.jpg"
                 alt="About 360HOME"
                 fill
                 className="object-cover"
@@ -130,7 +130,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px] overflow-hidden shadow-xl">
               <Image
-                src="/about-2.jpg"
+                src="https://i.pinimg.com/736x/4c/e8/3a/4ce83a0336291e4651019a95715cb921.jpg"
                 alt="About 360HOME"
                 fill
                 className="object-cover"
@@ -185,7 +185,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-[500px] overflow-hidden shadow-xl">
               <Image
-                src="/about-3.jpg"
+                src="https://phongkhachdep.org/wp-content/uploads/2021/07/Phong-ca%CC%81ch-no%CC%A3%CC%82i-tha%CC%82%CC%81t-to%CC%82%CC%81i-gia%CC%89n-.jpeg"
                 alt="About 360HOME"
                 fill
                 className="object-cover"
@@ -198,7 +198,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px] overflow-hidden shadow-xl">
               <Image
-                src="/about-4.jpg"
+                src="https://noithatmon.com/wp-content/uploads/2023/04/giay-dan-tuong-mau-5.jpg"
                 alt="About 360HOME"
                 fill
                 className="object-cover"
@@ -253,7 +253,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-[500px] overflow-hidden shadow-xl">
               <Image
-                src="/about-5.jpg"
+                src="https://www.roomie.vn/wp-content/uploads/2021/03/Townhouse-1-1.webp"
                 alt="About 360HOME"
                 fill
                 className="object-cover"
@@ -266,7 +266,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px] overflow-hidden shadow-xl">
               <Image
-                src="/about-6.jpg"
+                src="https://blog.indiacircus.com/wp-content/uploads/2024/05/Floral-and-Geometric-Patterns-.webp"
                 alt="About 360HOME"
                 fill
                 className="object-cover"
@@ -295,7 +295,7 @@ export default function AboutPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/process-flow-background.jpg"
+            src="https://www.tysol.pl/imgcache/750x530/c/uploads/news/127585/1725884740945cbc8926846736437bcf.jpg"
             alt="Background"
             fill
             className="object-cover"

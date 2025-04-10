@@ -2,13 +2,41 @@ import Image from "next/image";
 
 export default function PartnerLogos() {
   const partners = [
-    { id: 1, name: "Partner 1", logo: "/partners/partner1.png" },
-    { id: 2, name: "Partner 2", logo: "/partners/partner2.png" },
-    { id: 3, name: "Partner 3", logo: "/partners/partner3.png" },
-    { id: 4, name: "Partner 4", logo: "/partners/partner4.png" },
-    { id: 5, name: "Partner 5", logo: "/partners/partner5.png" },
-    { id: 6, name: "Partner 6", logo: "/partners/partner6.png" },
-    { id: 7, name: "Partner 7", logo: "/partners/partner7.png" },
+    {
+      id: 1,
+      name: "Partner 1",
+      logo: "https://360home.vn/wp-content/uploads/2022/12/Rectangle-87-1.png",
+    },
+    {
+      id: 2,
+      name: "Partner 2",
+      logo: "https://360home.vn/wp-content/uploads/2022/12/Rectangle-90.png",
+    },
+    {
+      id: 3,
+      name: "Partner 3",
+      logo: "https://360home.vn/wp-content/uploads/2022/12/Rectangle-88.png",
+    },
+    {
+      id: 4,
+      name: "Partner 4",
+      logo: "https://360home.vn/wp-content/uploads/2022/12/Rectangle-89.png",
+    },
+    {
+      id: 5,
+      name: "Partner 5",
+      logo: "https://360home.vn/wp-content/uploads/2022/12/Rectangle-91.png",
+    },
+    {
+      id: 6,
+      name: "Partner 6",
+      logo: "https://360home.vn/wp-content/uploads/2024/03/logo-flexfit1.png",
+    },
+    {
+      id: 7,
+      name: "Partner 7",
+      logo: "https://360home.vn/wp-content/uploads/2024/03/attachment-1.png",
+    },
   ];
 
   return (

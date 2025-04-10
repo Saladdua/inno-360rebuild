@@ -18,9 +18,13 @@ export default async function Home() {
     <div>
       {/* Hero Section */}
       <section className="relative h-[600px]">
-        <link rel="icon" type="image/x-icon" href="/favicon.png" />
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href="https://360home.vn/wp-content/uploads/2024/04/z3884947680710_c9274b2e99dacfdf9be8d264cb069f22-e1668582110634-removebg-preview.png"
+        />
         <Image
-          src="/hero-background.jpg"
+          src="https://360home.vn/wp-content/uploads/2023/06/5.jpg"
           alt="Interior design"
           fill
           className="object-cover"
@@ -76,7 +80,7 @@ export default async function Home() {
             </div>
             <div className="relative h-[400px]">
               <Image
-                src="/about-4.jpg"
+                src="https://www.roomie.vn/wp-content/uploads/2021/03/Townhouse-1-1.webp"
                 alt="About 360HOME"
                 fill
                 className="object-cover rounded-lg"
@@ -94,7 +98,7 @@ export default async function Home() {
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="w-16 h-16 bg-[#f5f5f5] rounded-full flex items-center justify-center mb-4 mx-auto">
                 <Image
-                  src="/service-1.png?height=40&width=40"
+                  src="https://360home.vn/wp-content/uploads/2023/03/Admin-Settings-Male.png"
                   alt="Design"
                   width={40}
                   height={40}
@@ -111,7 +115,7 @@ export default async function Home() {
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="w-16 h-16 bg-[#f5f5f5] rounded-full flex items-center justify-center mb-4 mx-auto">
                 <Image
-                  src="/service-2.png?height=40&width=40"
+                  src="https://360home.vn/wp-content/uploads/2023/03/Worker.png"
                   alt="Construction"
                   width={40}
                   height={40}
@@ -128,7 +132,7 @@ export default async function Home() {
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="w-16 h-16 bg-[#f5f5f5] rounded-full flex items-center justify-center mb-4 mx-auto">
                 <Image
-                  src="/service-3.png?height=40&width=40"
+                  src="https://360home.vn/wp-content/uploads/2023/03/Salary-male.png"
                   alt="Consultation"
                   width={40}
                   height={40}
